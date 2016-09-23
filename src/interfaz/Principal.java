@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package interfaz;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -50,8 +51,7 @@ public class Principal extends javax.swing.JFrame {
         tblTablaInicial = new javax.swing.JTable();
         cmbOperacion = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtResultado = new javax.swing.JTextArea();
+        txtResultado = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -85,37 +85,58 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("N. de Fila");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 52, -1, -1));
-        jPanel3.add(txtNdefila, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 30, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel3.add(txtNdefila, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 30, -1));
 
         jLabel2.setText("N. de Columnas");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, 20));
-        jPanel3.add(txtNdecolumnas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 30, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, 20));
+        jPanel3.add(txtNdecolumnas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 30, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 290, 110));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 360, 90));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdCrear.setText("Crear");
+        cmdCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCrearActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         cmdManual.setText("Manual");
         jPanel4.add(cmdManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         cmdAutom.setText("Automatico");
+        cmdAutom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAutomActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdAutom, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         cmdOperacion.setText("Operacion");
+        cmdOperacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdOperacionActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
 
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 470, 80));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 470, 80));
 
-        jLabel3.setText("jLabel3");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 3, 36)); // NOI18N
+        jLabel3.setText("Operaciones con Matrices");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         tblTablaResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,7 +148,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblTablaResultado);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 400, 220));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 400, 220));
 
         tblTablaInicial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,39 +160,160 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblTablaInicial);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 400, 220));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 400, 220));
 
-        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant . Num Pares", "Numeros Pares", "Letra C", "Letra H" }));
-        jPanel1.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, -1));
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant . Num Pares", "Numeros Pares", "Letra C", "Diagonal Principal", "Letra H" }));
+        jPanel1.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtResultado.setColumns(20);
-        txtResultado.setRows(5);
-        jScrollPane4.setViewportView(txtResultado);
+        txtResultado.setEditable(false);
+        jPanel5.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 320, 30));
 
-        jPanel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 80));
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 420, 110));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 380, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1003, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(997, 635));
+        setSize(new java.awt.Dimension(1019, 635));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
+
+        int nf, nc;
+        DefaultTableModel tm, tm2;
+
+        nf = Integer.parseInt(txtNdefila.getText());
+        nc = Integer.parseInt(txtNdecolumnas.getText());
+
+        tm = (DefaultTableModel) tblTablaInicial.getModel();
+        tm2 = (DefaultTableModel) tblTablaResultado.getModel();
+
+        tm.setRowCount(nf);
+        tm.setColumnCount(nc);
+
+        tm2.setRowCount(nf);
+        tm2.setColumnCount(nc);
+
+
+    }//GEN-LAST:event_cmdCrearActionPerformed
+
+    private void cmdAutomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAutomActionPerformed
+
+        int nf, nc, n;
+
+        nc = tblTablaInicial.getColumnCount();
+        nf = tblTablaInicial.getRowCount();
+
+        for (int i = 0; i < nc; i++) {
+            for (int j = 0; j < nf; j++) {
+                n = (int) (Math.random() * 50 + 1);
+                tblTablaInicial.setValueAt(n, j, i);
+            }
+        }
+
+
+    }//GEN-LAST:event_cmdAutomActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+
+        int nf, nc;
+
+        nf = tblTablaInicial.getRowCount();
+        nc = tblTablaInicial.getColumnCount();
+        DefaultTableModel tm, tm2;
+
+        txtNdefila.setText("");
+        txtNdecolumnas.setText("");
+        txtNdefila.requestFocusInWindow();
+        cmbOperacion.setSelectedIndex(0);
+        txtResultado.setText("");
+
+        tm = (DefaultTableModel) tblTablaInicial.getModel();
+        tm2 = (DefaultTableModel) tblTablaResultado.getModel();
+
+        tm.setRowCount(0);
+        tm.setColumnCount(0);
+
+        tm2.setRowCount(0);
+        tm2.setColumnCount(0);
+
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void cmdOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOperacionActionPerformed
+        int op, nf, nc, aux, cont=0;
+        op = cmbOperacion.getSelectedIndex();
+
+        nf = tblTablaInicial.getRowCount();
+        nc = tblTablaResultado.getColumnCount();
+
+        switch (op) {
+            case 0:
+                for (int i = 0; i < nc; i++) {
+                    for (int j = 0; j < nf; j++) {
+                        aux = (int) tblTablaInicial.getValueAt(i, j);
+                        if (aux % 2 == 0) {
+                            cont++;
+                        }
+                    }
+                }
+                txtResultado.setText("EL NUMERO DE ELEMENTOS PARES ES: " + cont);
+                break;
+            case 1:
+                for (int i = 0; i < nc; i++) {
+                    for (int j = 0; j < nf; j++) {
+                        aux = (int) tblTablaInicial.getValueAt(i, j);
+                        if (aux % 2 == 0) {
+                            tblTablaResultado.setValueAt(aux, i, j);
+                        }
+                    }
+                }
+                break;
+            case 2:
+                 for (int i = 0; i < nc; i++) {
+                    for (int j = 0; j < nf; j++) {
+                        aux = (int) tblTablaInicial.getValueAt(i, j);
+                        if (i == 0 || i== nf -1 || j == 0) {
+                            tblTablaResultado.setValueAt(aux, i, j);
+                        }
+                    }
+                }
+            break;
+            case 3:
+                for (int i = 0; i < nc; i++) {
+                    for (int j = 0; j < nf; j++) {
+                        aux = (int) tblTablaInicial.getValueAt(i, j);
+                        if (i == j) {
+                            tblTablaResultado.setValueAt(aux, i, j);
+                        }
+                    }
+                }
+                break;
+            case 4:
+                for (int i = 0; i < nc; i++) {
+                    for (int j = 0; j < nf; j++) {
+                        aux = (int) tblTablaInicial.getValueAt(i, j);
+                        if (j == 0 || j == nc-1 || i ==(nf-1)/2 ) {
+                            tblTablaResultado.setValueAt(aux, i, j);
+                        }
+                    }
+                }
+                break;
+        }
+
+    }//GEN-LAST:event_cmdOperacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,12 +368,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tblTablaInicial;
     private javax.swing.JTable tblTablaResultado;
     private javax.swing.JTextField txtNdecolumnas;
     private javax.swing.JTextField txtNdefila;
-    private javax.swing.JTextArea txtResultado;
+    private javax.swing.JTextField txtResultado;
     // End of variables declaration//GEN-END:variables
+
 }
