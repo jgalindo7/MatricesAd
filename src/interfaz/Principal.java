@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import clse.Helper;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +21,12 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        JButton botonesH[] = {cmdCrear, cmdLimpiar};
+        JButton botonesD[] = {cmdOperacion, cmdAutom, cmdManual};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.desabilitarBotones(botonesD);
+
     }
 
     /**
@@ -138,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 470, 80));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 470, 80));
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 3, 36)); // NOI18N
         jLabel3.setText("Operaciones con Matrices");
@@ -213,6 +221,11 @@ public class Principal extends javax.swing.JFrame {
         tm2.setRowCount(nf);
         tm2.setColumnCount(nc);
 
+        JButton botonesH[] = {cmdManual, cmdLimpiar, cmdAutom};
+        JButton botonesD[] = {cmdOperacion, cmdCrear};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.desabilitarBotones(botonesD);
 
     }//GEN-LAST:event_cmdCrearActionPerformed
 
@@ -230,22 +243,21 @@ public class Principal extends javax.swing.JFrame {
             }
         }
 
+        JButton botonesH[] = {cmdOperacion, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear, cmdAutom, cmdManual};
 
+        Helper.habilitarBotones(botonesH);
+        Helper.desabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdAutomActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-
-        int nf, nc;
-
-        nf = tblTablaInicial.getRowCount();
-        nc = tblTablaInicial.getColumnCount();
-        DefaultTableModel tm, tm2;
 
         txtNdefila.setText("");
         txtNdecolumnas.setText("");
         txtNdefila.requestFocusInWindow();
         cmbOperacion.setSelectedIndex(0);
         txtResultado.setText("");
+        DefaultTableModel tm, tm2;
 
         tm = (DefaultTableModel) tblTablaInicial.getModel();
         tm2 = (DefaultTableModel) tblTablaResultado.getModel();
@@ -256,103 +268,75 @@ public class Principal extends javax.swing.JFrame {
         tm2.setRowCount(0);
         tm2.setColumnCount(0);
 
+        JButton botonesH[] = {cmdCrear, cmdLimpiar};
+        JButton botonesD[] = {cmdOperacion, cmdAutom, cmdManual};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.desabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOperacionActionPerformed
-        int op, nf, nc, aux, cont=0;
+        int op, aux, cantPares;
         op = cmbOperacion.getSelectedIndex();
-
-        nf = tblTablaInicial.getRowCount();
-        nc = tblTablaResultado.getColumnCount();
 
         switch (op) {
             case 0:
-                for (int i = 0; i < nc; i++) {
-                    for (int j = 0; j < nf; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (aux % 2 == 0) {
-                            cont++;
-                        }
-                    }
-                }
-                txtResultado.setText("EL NUMERO DE ELEMENTOS PARES ES: " + cont);
+                cantPares = Helper.cantidadPares(tblTablaInicial);
+                txtResultado.setText("EL NUMERO DE ELEMENTOS PARES ES: " + cantPares);
                 break;
             case 1:
-                for (int i = 0; i < nc; i++) {
-                    for (int j = 0; j < nf; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (aux % 2 == 0) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-                }
+                Helper.pares(tblTablaInicial, tblTablaResultado);
                 break;
             case 2:
-                 for (int i = 0; i < nc; i++) {
-                    for (int j = 0; j < nf; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == 0 || i== nf -1 || j == 0) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-                }
-            break;
+                Helper.letraC(tblTablaInicial, tblTablaResultado);
+                break;
             case 3:
-                for (int i = 0; i < nc; i++) {
-                    for (int j = 0; j < nf; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == j) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-                }
+                Helper.diagonalPrincipal(tblTablaInicial, tblTablaResultado);
                 break;
             case 4:
-                for (int i = 0; i < nc; i++) {
-                    for (int j = 0; j < nf; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 || j == nc-1 || i ==(nf-1)/2 ) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-                }
+                Helper.letraH(tblTablaInicial, tblTablaResultado);
                 break;
         }
+        JButton botonesH[] = {cmdManual, cmdAutom,cmdLimpiar};
+        JButton botonesD[] = {cmdOperacion,cmdCrear};
 
+        Helper.habilitarBotones(botonesH);
+        Helper.desabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdOperacionActionPerformed
 
     private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
-      int nf,nc;
-      double n;
+        int nf, nc;
+        double n;
         int sw, res;
-        boolean aux=true;
-        
+        boolean aux = true;
+
         nc = tblTablaInicial.getColumnCount();
         nf = tblTablaResultado.getRowCount();
-        
-        for (int i = 0; i < nf ; i++) {
-            for (int j = 0; j < nc ; j++) 
-            do {
-                sw = 1;
-                try {
-                    n = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posición ["+i+"]"+"["+j+"]"));
-                    tblTablaInicial.setValueAt(n, i, j);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Digite la información correctamente", "Error", JOptionPane.ERROR_MESSAGE);
-                    sw = 0;
-                } catch (NullPointerException e) {
-                   res= JOptionPane.showConfirmDialog(this, "¿Desea Salir?", "Salir", JOptionPane.YES_NO_OPTION);
-                   if(res == 0){
+
+        for (int i = 0; i < nf; i++) {
+            for (int j = 0; j < nc; j++) {
+                do {
                     sw = 1;
-                    i = nf;
-                    j = nc;
-                    aux = false;
-                   }else{
-                       sw =0;
-                   }
-                   
-                }
-            } while (sw == 0);
+                    try {
+                        n = Integer.parseInt(JOptionPane.showInputDialog(this, "Digite el elemento en la posición ["+ i +"]" + "["+ j +"]").trim());
+                        tblTablaInicial.setValueAt(n, i, j);
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Digite un numero valido", "Error",3);
+                        sw = 0;
+                    } catch (NullPointerException e) {
+                        res = JOptionPane.showConfirmDialog(this, "¿Seguro deseas Salir?", "Salir", JOptionPane.YES_NO_OPTION);
+                        if (res == 0) {
+                            sw = 1;
+                            i = nf;
+                            j = nc;
+                            aux = false;
+                        } else {
+                            sw = 0;
+                        }
+
+                    }
+                } while (sw == 0);
+            }
         }
     }//GEN-LAST:event_cmdManualActionPerformed
 
