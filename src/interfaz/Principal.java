@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -106,6 +107,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         cmdManual.setText("Manual");
+        cmdManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdManualActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         cmdAutom.setText("Automatico");
@@ -314,6 +320,41 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cmdOperacionActionPerformed
+
+    private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
+      int nf,nc;
+      double n;
+        int sw, res;
+        boolean aux=true;
+        
+        nc = tblTablaInicial.getColumnCount();
+        nf = tblTablaResultado.getRowCount();
+        
+        for (int i = 0; i < nf ; i++) {
+            for (int j = 0; j < nc ; j++) 
+            do {
+                sw = 1;
+                try {
+                    n = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posición ["+i+"]"+"["+j+"]"));
+                    tblTablaInicial.setValueAt(n, i, j);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Digite la información correctamente", "Error", JOptionPane.ERROR_MESSAGE);
+                    sw = 0;
+                } catch (NullPointerException e) {
+                   res= JOptionPane.showConfirmDialog(this, "¿Desea Salir?", "Salir", JOptionPane.YES_NO_OPTION);
+                   if(res == 0){
+                    sw = 1;
+                    i = nf;
+                    j = nc;
+                    aux = false;
+                   }else{
+                       sw =0;
+                   }
+                   
+                }
+            } while (sw == 0);
+        }
+    }//GEN-LAST:event_cmdManualActionPerformed
 
     /**
      * @param args the command line arguments
