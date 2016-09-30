@@ -60,7 +60,8 @@ public class Principal extends javax.swing.JFrame {
         tblTablaInicial = new javax.swing.JTable();
         cmbOperacion = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
-        txtResultado = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtResultado = new javax.swing.JTextArea();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -176,16 +177,19 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 400, 220));
 
-        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant . Num Pares", "Numeros Pares", "Letra C", "Diagonal Principal", "Letra H" }));
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant . Num Pares", "Numeros Pares", "Letra C", "Diagonal Principal", "Letra H", "RecorridoUno" }));
         jPanel1.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtResultado.setEditable(false);
-        jPanel5.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 320, 30));
+        txtResultado.setColumns(20);
+        txtResultado.setRows(5);
+        jScrollPane4.setViewportView(txtResultado);
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 380, 90));
+        jPanel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 390, -1));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 440, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,10 +201,12 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1019, 635));
+        setSize(new java.awt.Dimension(1019, 677));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -296,9 +302,12 @@ public class Principal extends javax.swing.JFrame {
             case 4:
                 Helper.letraH(tblTablaInicial, tblTablaResultado);
                 break;
+            case 5:
+                txtResultado.setText(Helper.recorridoUno(tblTablaInicial));
+                break;
         }
-        JButton botonesH[] = {cmdManual, cmdAutom,cmdLimpiar};
-        JButton botonesD[] = {cmdOperacion,cmdCrear};
+        JButton botonesH[] = {cmdManual, cmdAutom, cmdLimpiar};
+        JButton botonesD[] = {cmdOperacion, cmdCrear};
 
         Helper.habilitarBotones(botonesH);
         Helper.desabilitarBotones(botonesD);
@@ -318,10 +327,10 @@ public class Principal extends javax.swing.JFrame {
                 do {
                     sw = 1;
                     try {
-                        n = Integer.parseInt(JOptionPane.showInputDialog(this, "Digite el elemento en la posición ["+ i +"]" + "["+ j +"]").trim());
+                        n = Integer.parseInt(JOptionPane.showInputDialog(this, "Digite el elemento en la posición [" + i + "]" + "[" + j + "]").trim());
                         tblTablaInicial.setValueAt(n, i, j);
                     } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Digite un numero valido", "Error",3);
+                        JOptionPane.showMessageDialog(this, "Digite un numero valido", "Error", 3);
                         sw = 0;
                     } catch (NullPointerException e) {
                         res = JOptionPane.showConfirmDialog(this, "¿Seguro deseas Salir?", "Salir", JOptionPane.YES_NO_OPTION);
@@ -393,12 +402,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tblTablaInicial;
     private javax.swing.JTable tblTablaResultado;
     private javax.swing.JTextField txtNdecolumnas;
     private javax.swing.JTextField txtNdefila;
-    private javax.swing.JTextField txtResultado;
+    private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 
 }
