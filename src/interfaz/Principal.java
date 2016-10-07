@@ -177,7 +177,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 400, 220));
 
-        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant . Num Pares", "Numeros Pares", "Letra C", "Diagonal Principal", "Letra H", "RecorridoUno" }));
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant . Num Pares", "Numeros Pares", "Letra C", "Diagonal Principal", "Letra H", "RecorridoUno", "RecorridoDos", "RecorridoTres" }));
         jPanel1.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
@@ -304,6 +304,12 @@ public class Principal extends javax.swing.JFrame {
                 break;
             case 5:
                 txtResultado.setText(Helper.recorridoUno(tblTablaInicial));
+                break;
+            case 6:
+                txtResultado.setText(Helper.recorridoDos(tblTablaInicial));
+                break;
+            case 7:
+                txtResultado.setText(Helper.recorridoTres(tblTablaInicial));
                 break;
         }
         JButton botonesH[] = {cmdManual, cmdAutom, cmdLimpiar};

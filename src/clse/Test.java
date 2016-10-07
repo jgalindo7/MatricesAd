@@ -43,6 +43,6 @@ public class Test {
         
         System.out.println(Helper.Mostrar(m));
         System.out.println("Recorrido");
-        System.out.println(Helper.recorridoDiagonalPrincipalArriba(m,4,2));
+        System.out.println(Helper.recorridoDiagonalSecundariaArriba(m));
     }
 }
